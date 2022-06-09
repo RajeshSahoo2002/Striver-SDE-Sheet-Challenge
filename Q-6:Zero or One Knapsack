@@ -1,0 +1,59 @@
+QUESTION:0/1 KNAPSACK.
+
+import java.util.ArrayList;
+
+public class Solution {
+	private static int maxProfitHelper(ArrayList<Integer> values, ArrayList<Integer> weights, int currIndex, int w,
+			ArrayList<ArrayList<Integer>> lookUp) {
+		// Base condition
+		if (currIndex == values.size() || w == 0) {
+			return 0;
+		}
+
+		// If we have already solved this subproblem
+		if (lookUp.get(currIndex).get(w) != -1) {
+			return lookUp.get(currIndex).get(w);
+		}
+
+		int result = 0;
+
+		// If the weight of the current item is less than or equal to the capacity of
+		// the knapsack
+		if (weights.get(currIndex).intValue() <= w) {
+			// Max profit by including the current item
+			int include = values.get(currIndex)
+					+ maxProfitHelper(values, weights, currIndex + 1, w - weights.get(currIndex), lookUp);
+
+			// Max Profit by excluding the current item
+			int exclude = maxProfitHelper(values, weights, currIndex + 1, w, lookUp);
+
+			// Update the result
+			result = Math.max(include, exclude);
+		} else {
+			// We can't include the current item
+			result = maxProfitHelper(values, weights, currIndex + 1, w, lookUp);
+
+		}
+
+		// Store the result
+		lookUp.get(currIndex).set(w, result);
+
+		// Return final profit
+		return result;
+	}
+
+	public static int maxProfit(ArrayList<Integer> values, ArrayList<Integer> weights, int n, int w) {
+
+		ArrayList<ArrayList<Integer>> lookUp = new ArrayList<ArrayList<Integer>>();
+
+		for (int i = 0; i < n + 1; i++) {
+			ArrayList<Integer> temp = new ArrayList<Integer>();
+			for (int j = 0; j < w + 1; j++) {
+				temp.add(-1);
+			}
+
+			lookUp.add(temp);
+		}
+		return maxProfitHelper(values, weights, 0, w, lookUp);
+	}
+}
