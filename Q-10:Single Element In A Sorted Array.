@@ -1,0 +1,16 @@
+QUESTION:SINGLE ELEMENT IN AN SORTED ARRAY.
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static int uniqueElement(ArrayList<Integer> arr) 
+    {
+        int res=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            res=res^arr.get(i);
+        }
+        return res;
+    }
+}
