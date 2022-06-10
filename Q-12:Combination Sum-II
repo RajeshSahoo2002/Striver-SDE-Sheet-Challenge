@@ -1,0 +1,35 @@
+QUESTION:COMBINATION SUM-II.
+
+import java.util.ArrayList;
+import java.util.Collections;
+public class Solution 
+{
+    public static ArrayList<ArrayList<Integer>> combinationSum2(ArrayList<Integer> arr, int n, int target)
+    {
+        ArrayList<ArrayList<Integer>> res=new ArrayList<>();
+        Collections.sort(arr);
+        combination(0,arr,n,target,res,new ArrayList<>());
+        return res;
+    }
+    public static void combination(int index,ArrayList<Integer> arr,int n,int target,ArrayList<ArrayList<Integer>> res,ArrayList<Integer> ds)
+    {
+        if(target==0)
+        {
+            res.add(new ArrayList<>(ds));
+        }
+        for(int i=index;i<n;i++)
+        {
+            if(i>index && arr.get(i)==arr.get(i-1))
+            {
+                continue;
+            }
+            if(arr.get(i)>target)
+            {
+                break;
+            }
+            ds.add(arr.get(i));
+            combination(i+1,arr,n,target-arr.get(i),res,ds);
+            ds.remove(ds.size()-1);
+        }
+    }
+}
