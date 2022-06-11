@@ -1,0 +1,23 @@
+QUESTION:MAXIMUM PRODUCT SUBARRAY.
+
+import java.util.ArrayList;
+
+public class Solution {
+	public static int maximumProduct(ArrayList<Integer> arr, int n) {
+		if(arr==null)
+        {
+            return 0;
+        }
+        int res=arr.get(0);
+        for(int i=0;i<n;i++)
+        {
+            int prod=1;
+            for(int j=i;j<n;j++)
+            {
+                prod=prod*arr.get(j);
+                res=Math.max(res,prod);
+            }
+        }
+        return res;
+	}
+}
