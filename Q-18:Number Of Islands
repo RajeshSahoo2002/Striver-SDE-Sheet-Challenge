@@ -1,0 +1,37 @@
+QUESTION:NUMBER OF ISLANDS.
+
+public class Solution 
+{
+    public static int getTotalIslands(int[][] mat) 
+	{
+        int count=0;
+        for(int i=0;i<mat.length;i++)
+        {
+            for(int j=0;j<mat[0].length;j++)
+            {
+                if(mat[i][j]==1)
+                {
+                    dfshelp(mat,i,j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static void dfshelp(int mat[][],int rows,int cols)
+    {
+        if(rows<0 || rows>=mat.length || cols<0 || cols>=mat[0].length || mat[rows][cols]==0)
+        {
+            return;
+        }
+        mat[rows][cols]=0;
+        dfshelp(mat,rows-1,cols);
+        dfshelp(mat,rows+1,cols);
+        dfshelp(mat,rows,cols-1);
+        dfshelp(mat,rows,cols+1);
+        dfshelp(mat,rows-1,cols-1);
+        dfshelp(mat,rows+1,cols+1);
+        dfshelp(mat,rows-1,cols+1);
+        dfshelp(mat,rows+1,cols-1);
+    }
+}
