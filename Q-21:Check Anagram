@@ -1,0 +1,15 @@
+QUESTION:CHECK ANAGRAM.
+
+import java.util.*;
+public class Solution {
+    public static boolean areAnagram(String str1, String str2){
+        char ch1[]=str1.toCharArray();
+        Arrays.sort(ch1);
+        str1=String.valueOf(ch1);
+        char ch2[]=str2.toCharArray();
+        Arrays.sort(ch2);
+        str2=String.valueOf(ch2);
+        boolean res=str1.equals(str2);
+        return res;
+    }
+}
