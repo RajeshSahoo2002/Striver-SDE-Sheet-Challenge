@@ -1,0 +1,25 @@
+QUESTION:SUBSET SUM.
+
+import java.util.*;
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int num[]) {
+        ArrayList<Integer> res=new ArrayList<Integer>();
+        if(num==null || num.length==0)
+        {
+            return res;
+        }
+        fun(0,0,res,num);
+        Collections.sort(res);
+        return res;
+    }
+    public static void fun(int i,int sum,ArrayList<Integer> res,int num[])
+    {
+        if(i>=num.length)
+        {
+            res.add(sum);
+            return;
+        }
+        fun(i+1,sum+num[i],res,num);
+        fun(i+1,sum,res,num);
+    }
+}
