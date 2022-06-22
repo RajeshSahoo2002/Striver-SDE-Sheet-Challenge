@@ -1,0 +1,62 @@
+QUESTION:FLATTEN LINKEDLIST.
+
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+       Following is the class structure of the Node class:
+
+       class Node {
+	int data;
+	Node next;
+	Node child;
+
+	public Node(int data) {
+		this.data = data;
+		this.next = null;
+		this.child = null;
+	}
+}
+
+*****************************************************************/
+public class Solution {
+    public static Node mergelist(Node a,Node b)
+    {
+        Node dummy=new Node(0);
+        Node curr=dummy;
+        while(a!=null && b!=null)
+        {
+            if(a.data<=b.data)
+            {
+                dummy.child=a;
+                dummy=dummy.child;
+                a=a.child;
+            }
+            else
+            {
+                dummy.child=b;
+                dummy=dummy.child;
+                b=b.child;
+            }
+        }
+        if(a!=null)
+        {
+            dummy.child=a;
+        }
+        else
+        {
+            dummy.child=b;
+        }
+        return curr.child;
+    }
+	public static Node flattenLinkedList(Node start) {
+		if(start==null || start.next==null)
+        {
+            return start;
+        }
+        start.next=flattenLinkedList(start.next);
+        start=mergelist(start,start.next);
+        return start;
+	}
+}
+
