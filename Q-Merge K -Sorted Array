@@ -1,0 +1,26 @@
+QUESTION:MERGE K=SORTED ARRAY.
+
+used Priority queue because it stores all the numbers in min-heap.so when we store all we run the loop till k starting from 0.and after that we add in the resultatnt arraylist untile thw prioroty queue is empty.
+
+import java.util.*;
+
+public class Solution 
+{
+	public static ArrayList<Integer> mergeKSortedArrays(ArrayList<ArrayList<Integer>> kArrays, int k)
+	{
+		ArrayList<Integer> res=new ArrayList<Integer>();
+        PriorityQueue<Integer> pq=new PriorityQueue<Integer>();
+        for(int i=0;i<k;i++)
+        {
+            for(int j=0;j<kArrays.get(i).size();j++)
+            {
+                pq.add(kArrays.get(i).get(j));
+            }
+        }
+        while(pq.isEmpty()==false)
+        {
+            res.add(pq.poll());
+        }
+        return res;
+	}
+}
