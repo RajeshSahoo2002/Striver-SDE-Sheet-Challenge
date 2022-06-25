@@ -1,0 +1,40 @@
+QUESTION:IS HEIGHT BALANCED TREE.
+
+/*************************************************************
+
+Following is the Binary Tree node structure
+
+class BinaryTreeNode<T> 
+{
+    T data;
+    BinaryTreeNode<T> left;
+    BinaryTreeNode<T> right;
+
+    BinaryTreeNode(T data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+};
+
+*************************************************************/
+public class Solution {
+    public static int findheight(BinaryTreeNode<Integer> root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        return 1+Math.max(findheight(root.left),findheight(root.right));
+    }
+	public static boolean isBalancedBT(BinaryTreeNode<Integer> root) {
+		if(root==null)
+        {
+            return true;
+        }
+        int leftheight=findheight(root.left);
+        int rightheight=findheight(root.right);
+        //int res=leftheight-rightheight;
+        return (Math.abs(leftheight-rightheight)<=1) && isBalancedBT(root.left) && isBalancedBT(root.right); 
+	}
+}
